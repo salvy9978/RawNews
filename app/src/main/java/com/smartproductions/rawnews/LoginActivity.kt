@@ -2,8 +2,12 @@ package com.smartproductions.rawnews
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -22,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
     private final val RC_SIGN_IN = 200
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -31,20 +36,22 @@ class LoginActivity : AppCompatActivity() {
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
+        //Animaciones de nubes y texto logo
+        val animationNubeArriba = AnimationUtils.loadAnimation(this,R.anim.nube_arriba)
+        binding.nubearriba.animation = animationNubeArriba
+        val animationNubeAbajo = AnimationUtils.loadAnimation(this,R.anim.nube_abajo)
+        binding.nubeabajo.animation = animationNubeAbajo
+        setAnimatedTextLogo(binding.tvLogo,"RAW\nNEWS", 150)
 
-
-        // Set the dimensions of the sign-in button.
         // Set the dimensions of the sign-in button.
 
         val signInButton = binding.btnGoogle
-        signInButton.setSize(SignInButton.SIZE_STANDARD)
+        signInButton.setSize(SignInButton.SIZE_WIDE)
 
         signInButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
@@ -111,6 +118,28 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
+
+
+    fun setAnimatedTextLogo(tvLogo:TextView, texto:CharSequence, delay:Long = 200){
+        var index = 0
+        val handler : Handler = object : Handler(){
+
+        }
+        tvLogo.text = ""
+        var runnable: Runnable = object : Runnable {
+            override fun run() {
+                tvLogo.text = texto.subSequence(0, index++)
+                if (index<=texto.length){
+                    handler.postDelayed(this,delay)
+                }
+            }
+        }
+
+        handler.removeCallbacks(runnable)
+        handler.postDelayed(runnable,delay)
+    }
+
+
 
 
 

@@ -4,18 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@color/primary">
 
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvLogo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
          />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nubearriba"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_nubearriba"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nubeabajo"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_nubeabajo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:text="RAW\nNEWS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:textColor="@color/white"
+        android:textSize="100sp"
+        app:layout_constraintTop_toTopOf="@+id/nubearriba"
+        android:fontFamily="@font/letra_logo_font"
+        android:shadowColor="@color/secondary"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="30"
+        android:gravity="center_horizontal"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
