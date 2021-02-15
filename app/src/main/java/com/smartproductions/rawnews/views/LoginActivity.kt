@@ -1,4 +1,4 @@
-package com.smartproductions.rawnews
+package com.smartproductions.rawnews.views
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -16,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.smartproductions.rawnews.R
 import com.smartproductions.rawnews.databinding.ActivityLoginBinding
 
 
@@ -42,9 +42,9 @@ class LoginActivity : AppCompatActivity() {
 
 
         //Animaciones de nubes y texto logo
-        val animationNubeArriba = AnimationUtils.loadAnimation(this,R.anim.nube_arriba)
+        val animationNubeArriba = AnimationUtils.loadAnimation(this, R.anim.nube_arriba)
         binding.nubearriba.animation = animationNubeArriba
-        val animationNubeAbajo = AnimationUtils.loadAnimation(this,R.anim.nube_abajo)
+        val animationNubeAbajo = AnimationUtils.loadAnimation(this, R.anim.nube_abajo)
         binding.nubeabajo.animation = animationNubeAbajo
         setAnimatedTextLogo(binding.tvLogo,"RAW\nNEWS", 150)
 
@@ -62,7 +62,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
     }
 
     override fun onStart() {
@@ -75,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
 
         //TODO: pasar cuenta
         if(account!=null){
-            val intentIrMenu = Intent(this,MainActivity::class.java)
+            val intentIrMenu = Intent(this, MainActivity::class.java)
             startActivity(intentIrMenu)
         }
 
@@ -107,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
 
             // Signed in successfully, show authenticated UI.
             //TODO: pasar cuenta
-            val intentIrMenu = Intent(this,MainActivity::class.java)
+            val intentIrMenu = Intent(this, MainActivity::class.java)
             startActivity(intentIrMenu)
 
         } catch (e: ApiException) {
@@ -130,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
             override fun run() {
                 tvLogo.text = texto.subSequence(0, index++)
                 if (index<=texto.length){
-                    handler.postDelayed(this,delay)
+                    handler.postDelayed(this, delay)
                 }
             }
         }

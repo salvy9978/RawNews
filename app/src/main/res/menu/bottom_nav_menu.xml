@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/recientes"
+        android:enabled="true"
+        android:icon="@drawable/btm_nav_view_selector_ic_recient"
+        android:title="@string/last_news"
+        />
+    <item
+        android:id="@+id/categorias"
+        android:enabled="true"
+        android:icon="@drawable/btm_nav_view_selector_ic_categories"
+        android:title="@string/categories"/>
+    <item
+        android:id="@+id/favoritos"
+        android:enabled="true"
+        android:icon="@drawable/btm_nav_view_selector_ic_favorite"
+        android:title="@string/favorites"
+        />
+</menu>
