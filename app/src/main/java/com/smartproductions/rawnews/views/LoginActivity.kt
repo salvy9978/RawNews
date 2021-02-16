@@ -76,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
         if(account!=null){
             val intentIrMenu = Intent(this, MainActivity::class.java)
             startActivity(intentIrMenu)
+            finish()
         }
 
 
@@ -108,6 +109,8 @@ class LoginActivity : AppCompatActivity() {
             //TODO: pasar cuenta
             val intentIrMenu = Intent(this, MainActivity::class.java)
             startActivity(intentIrMenu)
+            finish()
+
 
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.

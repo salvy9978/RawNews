@@ -1,9 +1,13 @@
 package com.smartproductions.rawnews.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
@@ -36,26 +40,37 @@ class MainActivity : AppCompatActivity() {
         val btmNavView = binding.btmNavView
 
         btmNavView.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
+        val navContoller = findNavController(R.id.contenedor_main)
+
+        val navOptions = NavOptions.Builder()
+                .setLaunchSingleTop(true)
+                .setEnterAnim(R.anim.enter_anim)
+                .setExitAnim(R.anim.exit_anim)
+                .setPopEnterAnim(R.anim.enter_anim)
+                .setPopExitAnim(R.anim.exit_anim)
+                .setPopUpTo(navContoller.graph.startDestination, false)
+                .build()
 
 
         btmNavView.setOnNavigationItemSelectedListener {
             item -> when(item.itemId){
-                R.id.recientes ->{
-
-                    Toast.makeText(this,"Recientes",Toast.LENGTH_SHORT).show()
+                R.id.itBreakingNews ->{
+                    navContoller.navigate(R.id.breakingNewsFragment, null, navOptions)
                     true
                 }
-                R.id.categorias ->{
-                    Toast.makeText(this,"Categories",Toast.LENGTH_SHORT).show()
+                R.id.itCategories ->{
+                    navContoller.navigate(R.id.categoriesFragment, null, navOptions)
                     true
                 }
-                R.id.favoritos ->{
-                    Toast.makeText(this,"Favoritos",Toast.LENGTH_SHORT).show()
+                R.id.itFavorites ->{
+                    navContoller.navigate(R.id.favoritesFragment, null, navOptions)
                     true
-                }
-                else -> false
-                }
+                } else -> false
+            }
         }
+
+
+
         //BOTTOM NAVIGATION VIEW--------------FIN------------------
 
 
@@ -69,6 +84,9 @@ class MainActivity : AppCompatActivity() {
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         mGoogleSignInClient.signOut().addOnCompleteListener(this, OnCompleteListener<Void?> {
                 Toast.makeText(this,"Cerrar Sesión Correcto", Toast.LENGTH_SHORT).show()
+                val intentRedirectToLogin = Intent(this, LoginActivity::class.java)
+                startActivity(intentRedirectToLogin)
+                finish()
             })
     }
 }
