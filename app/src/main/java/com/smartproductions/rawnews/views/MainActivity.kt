@@ -4,13 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.smartproductions.rawnews.R
 import com.smartproductions.rawnews.databinding.ActivityMainBinding
@@ -53,23 +55,30 @@ class MainActivity : AppCompatActivity() {
 
 
         btmNavView.setOnNavigationItemSelectedListener {
+
             item -> when(item.itemId){
-                R.id.itBreakingNews ->{
-                    navContoller.navigate(R.id.breakingNewsFragment, null, navOptions)
-                    true
-                }
-                R.id.itCategories ->{
-                    navContoller.navigate(R.id.categoriesFragment, null, navOptions)
-                    true
-                }
-                R.id.itFavorites ->{
-                    navContoller.navigate(R.id.favoritesFragment, null, navOptions)
-                    true
-                } else -> false
+            R.id.itBreakingNews -> {
+
+                navContoller.navigate(R.id.breakingNewsFragment, null, navOptions)
+                true
+            }
+            R.id.itCategories -> {
+                navContoller.navigate(R.id.categoriesFragment, null, navOptions)
+                true
+            }
+            R.id.itFavorites -> {
+                navContoller.navigate(R.id.favoritesFragment, null, navOptions)
+                true
+            } else -> false
             }
         }
 
 
+        //Evitar recrear el fragment al pulsar en el mismo boton del btmNavView
+
+        btmNavView.setOnNavigationItemReselectedListener(OnNavigationItemReselectedListener {
+            // do nothing here
+        })
 
         //BOTTOM NAVIGATION VIEW--------------FIN------------------
 
@@ -83,10 +92,10 @@ class MainActivity : AppCompatActivity() {
             .build()
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         mGoogleSignInClient.signOut().addOnCompleteListener(this, OnCompleteListener<Void?> {
-                Toast.makeText(this,"Cerrar Sesión Correcto", Toast.LENGTH_SHORT).show()
-                val intentRedirectToLogin = Intent(this, LoginActivity::class.java)
-                startActivity(intentRedirectToLogin)
-                finish()
-            })
+            Toast.makeText(this, "Cerrar Sesión Correcto", Toast.LENGTH_SHORT).show()
+            val intentRedirectToLogin = Intent(this, LoginActivity::class.java)
+            startActivity(intentRedirectToLogin)
+            finish()
+        })
     }
 }

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -72,7 +73,6 @@ class LoginActivity : AppCompatActivity() {
          // the GoogleSignInAccount will be non-null.
         val account = GoogleSignIn.getLastSignedInAccount(this)
 
-        //TODO: pasar cuenta
         if(account!=null){
             val intentIrMenu = Intent(this, MainActivity::class.java)
             startActivity(intentIrMenu)
@@ -106,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
             val account = completedTask.getResult(ApiException::class.java)
 
             // Signed in successfully, show authenticated UI.
-            //TODO: pasar cuenta
+
             val intentIrMenu = Intent(this, MainActivity::class.java)
             startActivity(intentIrMenu)
             finish()
@@ -115,7 +115,9 @@ class LoginActivity : AppCompatActivity() {
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            //TODO: iniciar activity main updateUI(null)
+
+
+            //TO-DO: iniciar activity main updateUI(null)
             Log.w("Google SignIn", "signInResult:failed code=" + e.statusCode)
 
         }

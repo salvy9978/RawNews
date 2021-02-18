@@ -1,35 +1,104 @@
 package com.smartproductions.rawnews.models
 
-import android.icu.text.CaseMap
+
 import com.google.gson.annotations.SerializedName
-import java.security.CodeSource
 import java.util.*
 
-data class Noticia(
-        @SerializedName("uuid")
-        private val uuid :String,
-        @SerializedName("title")
-        private val title: String,
-        @SerializedName("description")
-        private val description: String,
-        @SerializedName("keywords")
-        private val keywords: String,
-        @SerializedName("snippet")
-        private val snippet : String,
-        @SerializedName("url")
-        private val url : String,
-        @SerializedName("image_url")
-        private val image_url: String,
-        @SerializedName("language")
-        private val language : String,
-        @SerializedName("published_at")
-        private val published_at: Date,
-        @SerializedName("source")
-        private val source: String,
-        @SerializedName("categories")
-        private val categories: List<String>
-)
+/* Usar esta cuando se consulta por varias noticias, temas o se busca */
+class NoticiasResponse {
+    @SerializedName("meta")
+    var meta: Meta? = null
+    @SerializedName("data")
+    var data: List<Noticia>? = null
+    @SerializedName("error")
+    var error: Error? = null
+}
 
+/* Usar esta unicamente cuando se pregunte por una noticia concreta */
+class NoticiaRespone{
+    @SerializedName("uuid")
+    var uuid: String? = null
+    @SerializedName("title")
+    var title: String? = null
+    @SerializedName("description")
+    var description: String? = null
+    @SerializedName("keywords")
+    var keywords: String? = null
+    @SerializedName("snippet")
+    var snippet: String? = null
+    @SerializedName("url")
+    var url: String? = null
+    @SerializedName("image_url")
+    var imageUrl: String? = null
+    @SerializedName("language")
+    var language: String? = null
+    @SerializedName("published_at")
+    var publishedAt: Date? = null
+    @SerializedName("source")
+    var source: String? = null
+    @SerializedName("categories")
+    var categories: List<String>? = null
+    @SerializedName("relevance_score")
+    var relevanceScore: Double? = null
+    @SerializedName("locale")
+    var locale: String? = null
+
+    @SerializedName("error")
+    var error: Error? = null
+}
+
+
+
+
+class Noticia {
+    @SerializedName("uuid")
+    var uuid: String? = null
+    @SerializedName("title")
+    var title: String? = null
+    @SerializedName("description")
+    var description: String? = null
+    @SerializedName("keywords")
+    var keywords: String? = null
+    @SerializedName("snippet")
+    var snippet: String? = null
+    @SerializedName("url")
+    var url: String? = null
+    @SerializedName("image_url")
+    var imageUrl: String? = null
+    @SerializedName("language")
+    var language: String? = null
+    @SerializedName("published_at")
+    var publishedAt: Date? = null
+    @SerializedName("source")
+    var source: String? = null
+    @SerializedName("categories")
+    var categories: List<String>? = null
+    @SerializedName("relevance_score")
+    var relevanceScore: Double? = null
+    @SerializedName("locale")
+    var locale: String? = null
+}
+
+
+
+class Meta{
+    @SerializedName("found")
+    var found: Int? = null
+    @SerializedName("returned")
+    var returned: Int? = null
+    @SerializedName("limit")
+    var limit: Int? = null
+    @SerializedName("page")
+    var page: Int? = null
+}
+
+
+class Error{
+    @SerializedName("code")
+    var code: String? = null
+    @SerializedName("message")
+    var message: String? = null
+}
 
 /* EXAMPLE
 {
