@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1035053056774",
+    "project_id": "rawnews-2b9f3",
+    "storage_bucket": "rawnews-2b9f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035053056774:android:2de5bf08e6021a2a335487",
+        "android_client_info": {
+          "package_name": "com.smartproductions.rawnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035053056774-3fmajhi78vok52j56t78r2k66o0c863m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWv99Doli8BZTZj-ghybDyx0twy2GbwsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035053056774-3fmajhi78vok52j56t78r2k66o0c863m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
