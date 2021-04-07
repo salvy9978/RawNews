@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1035053056774-ef2ievbfbeo7nm4ept2fohlaoe4nv52m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartproductions.rawnews",
+            "certificate_hash": "eba397e4164ebd6081993514c7223dfee7511191"
+          }
+        },
+        {
           "client_id": "1035053056774-3fmajhi78vok52j56t78r2k66o0c863m.apps.googleusercontent.com",
           "client_type": 3
         }

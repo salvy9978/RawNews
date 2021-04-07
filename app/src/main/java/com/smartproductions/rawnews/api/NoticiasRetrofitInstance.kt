@@ -12,7 +12,7 @@ object NoticiasRetrofitInstance {
 
 
     val certificatePinner = CertificatePinner.Builder().
-        add("api.thenewsapi.com", "sha256/saq/HgjCoNn90tIMVzEG1/0e5+LwEuEwUPA8ZzDxwjA=").build()
+        add("api.thenewsapi.com", "sha256/95Vxlvoc1lFuLcB85UYX1E1IYvDZ32dsgj+PT8zIrx4=").build()
 
     val okHttpClient = OkHttpClient.Builder().certificatePinner(certificatePinner).build()
 
@@ -20,7 +20,7 @@ object NoticiasRetrofitInstance {
         Retrofit.Builder()
                 .baseUrl(NOTICIAS_API_URL+ VERSION )
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
+                //.client(okHttpClient)
                 .build()
     }
 

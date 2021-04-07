@@ -8,9 +8,6 @@
     android:background="@color/primary">
 
 
-
-
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,13 +21,13 @@
         android:id="@+id/tvLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="90dp"
         android:text="RAW\nNEWS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
         android:textColor="@color/white"
-        android:textSize="80sp"
+        android:textSize="90sp"
         app:layout_constraintTop_toTopOf="@+id/nubearriba"
         android:fontFamily="@font/letra_logo_font"
         android:shadowColor="@color/secondary"
@@ -40,59 +37,17 @@
         android:gravity="center_horizontal"
         />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btn_google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvLogo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="18dp"
-        />
-
-
-    <View
-        app:layout_constraintTop_toBottomOf="@id/btn_google"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="fill_parent"
-        android:layout_height="4dp"
-        android:background="@drawable/separator"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="8dp"
-        android:id="@+id/separator"/>
-
-
-    <LinearLayout
-        android:orientation="vertical"
+    <fragment
+        android:id="@+id/contenedor_login"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/separator"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/favorites"
-            android:background="@drawable/background_rounded"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/favorites"
-            android:background="@drawable/background_rounded"
-            android:layout_marginTop="12dp"
-            android:inputType="textPassword"/>
-
-
-
-
-
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:defaultNavHost="true"
+        android:layout_marginTop="260dp"
+        app:navGraph="@navigation/nav_login" />
 
 
 

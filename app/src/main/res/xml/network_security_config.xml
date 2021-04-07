@@ -3,7 +3,7 @@
     <domain-config cleartextTrafficPermitted="false">
         <domain includeSubdomains="true">api.thenewsapi.com</domain>
         <pin-set>
-            <pin digest="SHA-256">saq/HgjCoNn90tIMVzEG1/0e5+LwEuEwUPA8ZzDxwjA=</pin>
+            <pin digest="SHA-256">95Vxlvoc1lFuLcB85UYX1E1IYvDZ32dsgj+PT8zIrx4=</pin>
         </pin-set>
     </domain-config>
 

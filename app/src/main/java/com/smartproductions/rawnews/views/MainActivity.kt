@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.google.firebase.auth.FirebaseAuth
 import com.smartproductions.rawnews.R
 import com.smartproductions.rawnews.databinding.ActivityMainBinding
 
@@ -87,15 +88,21 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun signOut() {
+
+        FirebaseAuth.getInstance().signOut()
+
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
         mGoogleSignInClient.signOut().addOnCompleteListener(this, OnCompleteListener<Void?> {
             Toast.makeText(this, "Cerrar Sesión Correcto", Toast.LENGTH_SHORT).show()
             val intentRedirectToLogin = Intent(this, LoginActivity::class.java)
             startActivity(intentRedirectToLogin)
             finish()
         })
+
     }
 }
