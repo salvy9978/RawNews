@@ -11,4 +11,12 @@ interface ApiInterface {
 
     @GET("news/top")
     suspend fun getTopNews(@Query("api_token") api_token:String = apiToken): Response<NoticiasResponse>
+
+    @GET("news/top")
+    suspend fun getTopNews(@Query("api_token") api_token:String = apiToken, @Query("page") page:Int): Response<NoticiasResponse>
+
+    @GET("news/top")
+    suspend fun getTopNews(@Query("api_token") api_token:String = apiToken,
+                           @Query("page") page:Int,
+                           @Query("language") language:String): Response<NoticiasResponse>
 }

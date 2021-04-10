@@ -11,5 +11,15 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login_here">Login here</string>
     <string name="register_fail">Error during register</string>
+    <string name="register_correct">Correct Registration</string>
+    <string name="login_fail">Login Fail</string>
+    <string name="verify_email_message">Please verify your email:</string>
+    <string name="or">or</string>
+    <string name="login_other_account">Login with other account</string>
+    <string name="cant_access_for_info">Can´t access for account info. Retrying.</string>
+    <string name="send">Send</string>
+    <string name="enter_password">Enter password:</string>
+    <string name="info_password_delete_account">**This password is just because you want to delete your account in a future**</string>
+
 
 </resources>

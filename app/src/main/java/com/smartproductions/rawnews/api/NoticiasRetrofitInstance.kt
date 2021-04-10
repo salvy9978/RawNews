@@ -20,7 +20,7 @@ object NoticiasRetrofitInstance {
         Retrofit.Builder()
                 .baseUrl(NOTICIAS_API_URL+ VERSION )
                 .addConverterFactory(GsonConverterFactory.create())
-                //.client(okHttpClient)
+                .client(okHttpClient)
                 .build()
     }
 

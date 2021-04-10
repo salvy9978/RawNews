@@ -79,12 +79,13 @@ class RegisterFragment : Fragment() {
                         // Sign in success, update UI with the signed-in user's information
                         //Log.d(TAG, "createUserWithEmail:success")
                         val user = mAuth.currentUser
-                        Toast.makeText(requireContext(), "Authentication Guay.",
+                        Toast.makeText(requireContext(), R.string.register_correct,
                             Toast.LENGTH_SHORT).show()
+                        sendEmailVerification()
                     } else {
                         // If sign in fails, display a message to the user.
                         //Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(requireContext(), "Authentication failed.",
+                        Toast.makeText(requireContext(), R.string.register_fail,
                             Toast.LENGTH_SHORT).show()
 
                     }
@@ -96,4 +97,22 @@ class RegisterFragment : Fragment() {
         }
 
     }
+
+
+    private fun sendEmailVerification() {
+
+        val user = mAuth.currentUser!!
+        user.sendEmailVerification()
+                .addOnCompleteListener(requireActivity()) { task ->
+                    val loginActivity = activity as LoginActivity
+                    loginActivity.mostrarFragmentVerifyEmail()
+                }
+
+    }
+
+
+
+
+
+
 }

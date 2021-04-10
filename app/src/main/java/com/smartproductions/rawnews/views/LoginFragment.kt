@@ -18,9 +18,13 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.smartproductions.rawnews.R
 import com.smartproductions.rawnews.databinding.LoginFragmentBinding
+import com.smartproductions.rawnews.repository.FirebaseRepository
 
 
 class LoginFragment : Fragment() {
@@ -33,12 +37,6 @@ class LoginFragment : Fragment() {
     private lateinit var mAuth: FirebaseAuth
 
 
-
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,6 +44,8 @@ class LoginFragment : Fragment() {
 
         _binding = LoginFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
+
+
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -84,7 +84,14 @@ class LoginFragment : Fragment() {
 
         })
 
+        //Boton efectuar login
+        val btnLogin = binding.btnLogin
+        btnLogin.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                signIn(binding.etUsername.text.toString(), binding.etPassword.text.toString())
+            }
 
+        })
 
 
         return view
@@ -99,9 +106,8 @@ class LoginFragment : Fragment() {
         val currentUser = mAuth.currentUser
 
         if(currentUser!=null){
-            val intentIrMenu = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intentIrMenu)
-            activity?.finish()
+
+            updateUI(currentUser)
         }
 
 
@@ -115,7 +121,6 @@ class LoginFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
@@ -155,9 +160,7 @@ class LoginFragment : Fragment() {
                 OnCompleteListener<AuthResult?> { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        val intentIrMenu = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intentIrMenu)
-                        activity?.finish()
+                        updateUI(mAuth.currentUser)
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("Firebase Auth", "signInWithCredential:failure", task.exception)
@@ -173,7 +176,41 @@ class LoginFragment : Fragment() {
         _binding = null
     }
 
+    private fun signIn(email: String, password: String) {
 
+        mAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    //Log.d(TAG, "signInWithEmail:success")
+                    val user = mAuth.currentUser
+                    updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    //Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        requireContext(), R.string.login_fail,
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
+            }
+
+    }
+
+    private fun updateUI(currentUser: FirebaseUser){
+        if(currentUser.isEmailVerified){
+
+            val loginActivity = activity as LoginActivity
+            loginActivity.mostrarFragmentCheckPasswordForDeleteAccount()
+
+
+        }else{
+            val loginActivity = activity as LoginActivity
+            loginActivity.mostrarFragmentVerifyEmail()
+        }
+
+    }
 
 }
 

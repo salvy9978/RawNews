@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "1035053056774",
-    "project_id": "rawnews-2b9f3",
-    "storage_bucket": "rawnews-2b9f3.appspot.com"
+    "project_number": "208183417696",
+    "project_id": "rawnews4",
+    "storage_bucket": "rawnews4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1035053056774:android:2de5bf08e6021a2a335487",
+        "mobilesdk_app_id": "1:208183417696:android:44643d2d6e8951ef9c1c05",
         "android_client_info": {
           "package_name": "com.smartproductions.rawnews"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1035053056774-ef2ievbfbeo7nm4ept2fohlaoe4nv52m.apps.googleusercontent.com",
+          "client_id": "208183417696-jrt8qo6dm1pu9emojh00ih14idvj1uim.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.smartproductions.rawnews",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "1035053056774-3fmajhi78vok52j56t78r2k66o0c863m.apps.googleusercontent.com",
+          "client_id": "208183417696-qqrfntieevqo621bce79jfc9o0mrb3d0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCWv99Doli8BZTZj-ghybDyx0twy2GbwsY"
+          "current_key": "AIzaSyC1sJYSrlFN4nQhQ6HaeCQAOZMie_rhchY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1035053056774-3fmajhi78vok52j56t78r2k66o0c863m.apps.googleusercontent.com",
+              "client_id": "208183417696-qqrfntieevqo621bce79jfc9o0mrb3d0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

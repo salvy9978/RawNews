@@ -19,4 +19,18 @@ class BreakingNewsViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
+    fun getTopNews(page : Int){
+        viewModelScope.launch {
+            val response = repository.getTopNews(page = page)
+            lvdNewsResponse.value = response
+        }
+    }
+
+    fun getTopNews(page : Int, language : String){
+        viewModelScope.launch {
+            val response = repository.getTopNews(page = page, language = language)
+            lvdNewsResponse.value = response
+        }
+    }
+
 }

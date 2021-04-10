@@ -76,6 +76,13 @@ class LoginActivity : AppCompatActivity() {
         navContoller.navigate(R.id.loginFragment, null, navOptions)
     }
 
+    fun mostrarFragmentVerifyEmail() {
+        navContoller.navigate(R.id.verifyEmailFragment, null, navOptions)
+    }
+
+    fun mostrarFragmentCheckPasswordForDeleteAccount() {
+        navContoller.navigate(R.id.checkPasswordForDeleteAccountFragment, null, navOptions)
+    }
 
 
 

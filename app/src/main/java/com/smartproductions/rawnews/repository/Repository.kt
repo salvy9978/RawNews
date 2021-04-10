@@ -10,5 +10,13 @@ class Repository {
         return NoticiasRetrofitInstance.apiNoticias.getTopNews()
     }
 
+    suspend fun getTopNews(page: Int):Response<NoticiasResponse>{
+        return NoticiasRetrofitInstance.apiNoticias.getTopNews(page = page)
+    }
+
+    suspend fun getTopNews(page: Int, language: String):Response<NoticiasResponse>{
+        return NoticiasRetrofitInstance.apiNoticias.getTopNews(page = page, language = language)
+    }
+
 
 }

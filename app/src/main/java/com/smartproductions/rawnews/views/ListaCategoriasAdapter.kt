@@ -10,8 +10,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.smartproductions.rawnews.R
 import com.smartproductions.rawnews.models.ElementoCategoria
+import com.smartproductions.rawnews.models.Noticia
 
-class ListaCategoriasAdapter(private val dataSet: MutableList<ElementoCategoria>): RecyclerView.Adapter<ListaCategoriasAdapter.ViewHolder>() {
+class ListaCategoriasAdapter(private val dataSet: List<ElementoCategoria>): RecyclerView.Adapter<ListaCategoriasAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvElementoCategoria: TextView

@@ -15,4 +15,18 @@
         android:name="com.smartproductions.rawnews.views.RegisterFragment"
         android:label="register_fragment"
         tools:layout="@layout/register_fragment" />
+    <fragment
+        android:id="@+id/verifyEmailFragment"
+        android:name="com.smartproductions.rawnews.views.VerifyEmailFragment"
+        android:label="verify_email_fragment"
+        tools:layout="@layout/verify_email_fragment" />
+
+    <fragment
+        android:id="@+id/checkPasswordForDeleteAccountFragment"
+        android:name="com.smartproductions.rawnews.views.CheckPasswordForDeleteAccountFragment"
+        android:label="check_password_for_delete_account_fragment"
+        tools:layout="@layout/check_password_for_delete_account_fragment" />
+
+
+
 </navigation>

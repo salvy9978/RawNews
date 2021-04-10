@@ -1,6 +1,8 @@
 package com.smartproductions.rawnews.models
 
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
@@ -44,9 +46,15 @@ data class NoticiaRespone(
     var locale: String? = null,
     @SerializedName("error")
     var error: Error? = null
-)
+) : Parcelable {
+    override fun describeContents(): Int {
+        TODO("Not yet implemented")
+    }
 
-
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        TODO("Not yet implemented")
+    }
+}
 
 
 data class Noticia (
