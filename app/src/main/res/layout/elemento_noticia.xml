@@ -11,6 +11,7 @@
     app:cardCornerRadius="12dp"
     app:cardBackgroundColor="@color/primary_Light"
     app:cardUseCompatPadding="true"
+    android:id="@+id/cvNoticia"
     >
     <LinearLayout
         android:layout_width="match_parent"

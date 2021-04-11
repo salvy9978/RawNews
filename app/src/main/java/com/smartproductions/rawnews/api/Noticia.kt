@@ -4,6 +4,7 @@ package com.smartproductions.rawnews.models
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 /* Usar esta cuando se consulta por varias noticias, temas o se busca */
@@ -46,17 +47,9 @@ data class NoticiaRespone(
     var locale: String? = null,
     @SerializedName("error")
     var error: Error? = null
-) : Parcelable {
-    override fun describeContents(): Int {
-        TODO("Not yet implemented")
-    }
+)
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        TODO("Not yet implemented")
-    }
-}
-
-
+@Parcelize
 data class Noticia (
     @SerializedName("uuid")
     var uuid: String? = null,
@@ -84,7 +77,7 @@ data class Noticia (
     var relevanceScore: Double? = null,
     @SerializedName("locale")
     var locale: String? = null
-)
+) : Parcelable
 
 
 class Meta(

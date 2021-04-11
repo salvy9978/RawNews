@@ -98,7 +98,6 @@ class MainActivity : AppCompatActivity() {
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         mGoogleSignInClient.signOut().addOnCompleteListener(this, OnCompleteListener<Void?> {
-            Toast.makeText(this, "Cerrar Sesión Correcto", Toast.LENGTH_SHORT).show()
             val intentRedirectToLogin = Intent(this, LoginActivity::class.java)
             startActivity(intentRedirectToLogin)
             finish()
