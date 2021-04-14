@@ -3,7 +3,7 @@
     <string name="last_news">Last NEWS</string>
     <string name="categories">Categories</string>
     <string name="favorites">Favorites</string>
-    <string name="username">Username</string>
+    <string name="username">Email</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
@@ -20,6 +20,33 @@
     <string name="send">Send</string>
     <string name="enter_password">Enter password:</string>
     <string name="info_password_delete_account">**This password is just because you want to delete your account in a future**</string>
+
+    <!-- NOMBRES DE LAS CATEGORIAS -->
+    <string name="GENERAL">GENERAL</string>
+    <string name="SCIENCE">SCIENCE</string>
+    <string name="SPORTS">SPORTS</string>
+    <string name="BUSINESS">BUSINESS</string>
+    <string name="HEALTH">HEALTH</string>
+    <string name="ENTERTAINMENT">ENTERTAINMENT</string>
+    <string name="TECH">TECH</string>
+    <string name="POLITICS">POLITICS</string>
+    <string name="FOOD">FOOD</string>
+    <string name="TRAVEL">TRAVEL</string>
+
+    <!-- VALIDATE INPUT TEXTS -->
+    <!-- EMAIL -->
+    <string name="introduce_email">Introduce an email</string>
+    <string name="not_valid_email">Not a valid email</string>
+
+    <!-- PASSWORD -->
+    <string name="introduce_password">Introduce a password</string>
+    <string name="minium_lenght_password">Enter at least 8 characters</string>
+
+    <!-- LIKES CONTADOR -->
+    <string name="likes">Likes</string>
+    <string name="one_like">Like</string>
+
+
 
 
 </resources>

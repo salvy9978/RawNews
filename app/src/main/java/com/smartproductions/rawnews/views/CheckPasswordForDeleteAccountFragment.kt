@@ -18,6 +18,7 @@ import com.google.firebase.ktx.Firebase
 import com.smartproductions.rawnews.R
 import com.smartproductions.rawnews.databinding.CheckPasswordForDeleteAccountFragmentBinding
 import com.smartproductions.rawnews.repository.FirebaseRepository
+import com.smartproductions.rawnews.util.ValidateInputText
 
 
 class CheckPasswordForDeleteAccountFragment : Fragment() {
@@ -70,6 +71,7 @@ class CheckPasswordForDeleteAccountFragment : Fragment() {
 
         binding.btnSend.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
+
                 if (sendPassword(mAuth.currentUser.uid, binding.tilPassword, binding.etPassword.text.toString())){
                     val intentIrMenu = Intent(requireContext(), MainActivity::class.java)
                     startActivity(intentIrMenu)
@@ -91,11 +93,19 @@ class CheckPasswordForDeleteAccountFragment : Fragment() {
     }
 
     private fun sendPassword(uid:String, passwordField: TextInputLayout, password: String): Boolean{
-        //TODO: Comprobar validez contraseña
-        var todoOk = true
-        firebaseRepository.setPasswordForDeleteAccount(uid,password)
 
-        return todoOk
+        var valid = true
+        val validPassword = ValidateInputText().validatePassword(password, passwordField.context)
+
+        if(!validPassword.first){
+            passwordField.error = validPassword.second
+            valid = validPassword.first
+        }else{
+            firebaseRepository.setPasswordForDeleteAccount(uid,password)
+        }
+
+
+        return valid
     }
 
 

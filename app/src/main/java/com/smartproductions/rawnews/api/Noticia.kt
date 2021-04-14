@@ -76,7 +76,8 @@ data class Noticia (
     @SerializedName("relevance_score")
     var relevanceScore: Double? = null,
     @SerializedName("locale")
-    var locale: String? = null
+    var locale: String? = null,
+    var isLiked: Boolean = false
 ) : Parcelable
 
 

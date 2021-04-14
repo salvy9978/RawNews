@@ -6,6 +6,114 @@
     android:layout_height="match_parent"
     tools:context=".views.NoticiaDetailActivity"
     android:background="@color/primary"
+    android:orientation="vertical"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSecondary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RAW NEWS"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintTop_toTopOf="@+id/nubearriba"
+            android:fontFamily="@font/letra_logo_font"
+            android:layout_gravity="center"
+            />
+
+        <Button
+            android:id="@+id/btnLogOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log Out"
+            android:layout_gravity="right"
+            android:textSize="12dp"
+            android:layout_marginEnd="8dp"
+
+            />
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/clPanelBack"
+        android:layout_margin="12dp"
+        >
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <TextView
+            android:id="@+id/tvFechaNoticia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+        <ImageView
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_heart"
+            app:tint="@color/white"
+            android:id="@+id/btnLikeNoticia"
+            android:tag="ic_heart"
+            android:padding="4dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/wvNoticia"/>
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.NoticiaDetailActivity"
+    android:background="@color/primary"
     android:orientation="vertical">
 
 
@@ -121,3 +229,5 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
+
+-->

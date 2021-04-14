@@ -9,11 +9,13 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.smartproductions.rawnews.R
 import com.smartproductions.rawnews.databinding.CategoriesFragmentBinding
 import com.smartproductions.rawnews.databinding.RegisterFragmentBinding
 import com.smartproductions.rawnews.models.ElementoCategoria
+import com.smartproductions.rawnews.util.ValidateInputText
 import com.smartproductions.rawnews.viewModels.CategoriesViewModel
 import java.lang.Exception
 
@@ -52,7 +54,10 @@ class RegisterFragment : Fragment() {
 
         btnRegister.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                registrar(binding.etUsername.text.toString(),binding.etPassword.text.toString())
+                registrar(binding.etUsername.text.toString(),
+                        binding.etPassword.text.toString(),
+                        binding.usernameTextInputLayout,
+                        binding.passwordTextInputLayout)
             }
 
         })
@@ -70,31 +75,56 @@ class RegisterFragment : Fragment() {
     }
 
 
-    private fun registrar(email:String, password:String){
-        //TODO: Verificar email correcto y condiciones password
-        try {
-            mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        //Log.d(TAG, "createUserWithEmail:success")
-                        val user = mAuth.currentUser
-                        Toast.makeText(requireContext(), R.string.register_correct,
-                            Toast.LENGTH_SHORT).show()
-                        sendEmailVerification()
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        //Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(requireContext(), R.string.register_fail,
-                            Toast.LENGTH_SHORT).show()
 
-                    }
+    private fun registrar(email:String, password:String, textInputLayoutEmail: TextInputLayout, textInputLayoutPassword: TextInputLayout){
+
+        var valid = true
+
+        val validEmail = ValidateInputText().validateEmail(email, textInputLayoutEmail.context)
 
 
-                }
-        }catch (e: Exception){
-            Toast.makeText(requireContext(),R.string.register_fail, Toast.LENGTH_SHORT).show()
+        if(!validEmail.first){
+            textInputLayoutEmail.error = validEmail.second
+            valid = validEmail.first
+
         }
+
+        val validPassword = ValidateInputText().validatePassword(password, textInputLayoutPassword.context)
+
+        if(!validPassword.first){
+            textInputLayoutPassword.error = validPassword.second
+            valid = validPassword.first
+
+        }
+
+        if(valid){
+            try {
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(requireActivity()) { task ->
+                            if (task.isSuccessful) {
+                                // Sign in success, update UI with the signed-in user's information
+                                //Log.d(TAG, "createUserWithEmail:success")
+                                val user = mAuth.currentUser
+                                Toast.makeText(requireContext(), R.string.register_correct,
+                                        Toast.LENGTH_SHORT).show()
+                                sendEmailVerification()
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                //Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                                Toast.makeText(requireContext(), R.string.register_fail,
+                                        Toast.LENGTH_SHORT).show()
+
+                            }
+
+
+                        }
+            }catch (e: Exception){
+                Toast.makeText(requireContext(),R.string.register_fail, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
 
     }
 

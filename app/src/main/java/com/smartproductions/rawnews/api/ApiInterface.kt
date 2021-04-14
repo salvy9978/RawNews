@@ -18,5 +18,11 @@ interface ApiInterface {
     @GET("news/top")
     suspend fun getTopNews(@Query("api_token") api_token:String = apiToken,
                            @Query("page") page:Int,
-                           @Query("language") language:String): Response<NoticiasResponse>
+                           @Query("locale") locale:String): Response<NoticiasResponse>
+
+    @GET("news/all")
+    suspend fun getNewsByCategory(@Query("api_token") api_token:String = apiToken,
+                                  @Query("page") page:Int,
+                                  @Query("language") language:String,
+                                  @Query("categories") category:String): Response<NoticiasResponse>
 }

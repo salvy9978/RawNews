@@ -20,4 +20,11 @@
         android:name="com.smartproductions.rawnews.views.FavoritesFragment"
         android:label="favorites_fragment"
         tools:layout="@layout/favorites_fragment" />
+
+    <fragment
+        android:id="@+id/mostrarNoticiasByCategoriaFragment"
+        android:name="com.smartproductions.rawnews.views.MostrarNoticiasByCategoriaFragment"
+        android:label="mostrar_noticias_by_categoria_fragment"
+        tools:layout="@layout/mostrar_noticias_by_categoria_fragment" />
+
 </navigation>

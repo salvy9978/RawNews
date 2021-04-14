@@ -6,27 +6,25 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.smartproductions.rawnews.R
 import com.smartproductions.rawnews.models.ElementoCategoria
 import com.smartproductions.rawnews.models.Noticia
 
-class ListaCategoriasAdapter(private val dataSet: List<ElementoCategoria>): RecyclerView.Adapter<ListaCategoriasAdapter.ViewHolder>() {
+class ListaCategoriasAdapter(private val dataSet: List<ElementoCategoria>, private val activityMain: MainActivity): RecyclerView.Adapter<ListaCategoriasAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvElementoCategoria: TextView
         val ivElementoCategoria : ImageView
+        val cvCategoria : CardView
+
         init {
             // Define click listener for the ViewHolder's View.
             tvElementoCategoria = view.findViewById(R.id.tvElementoCategoria)
             ivElementoCategoria = view.findViewById(R.id.ivElementoCategoria)
-
-            view.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    Toast.makeText(view.context,tvElementoCategoria.text,Toast.LENGTH_SHORT).show()
-                }
-            })
+            cvCategoria = view.findViewById(R.id.cvCategoria)
 
         }
     }
@@ -42,10 +40,21 @@ class ListaCategoriasAdapter(private val dataSet: List<ElementoCategoria>): Recy
         holder.ivElementoCategoria.setImageDrawable(ContextCompat.getDrawable(holder.itemView.context, dataSet[position].idFoto))
 
 
+        holder.cvCategoria.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                activityMain.mostrarFragmentNoticiasByCategorias(dataSet[position].nombreCategoria, dataSet[position].key)
+            }
+
+        })
+
 
     }
 
     override fun getItemCount(): Int {
         return dataSet.size
     }
+
+
+
+
 }

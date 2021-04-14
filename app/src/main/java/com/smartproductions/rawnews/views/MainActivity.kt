@@ -1,4 +1,4 @@
-package com.smartproductions.rawnews.views
+ package com.smartproductions.rawnews.views
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -22,7 +23,10 @@ import com.smartproductions.rawnews.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var  binding: ActivityMainBinding
-
+    private lateinit var  nombreCategoria: String
+    private var  keyCategoria: String = "general"
+    private lateinit var navContoller : NavController
+    private lateinit var navOptions: NavOptions
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        nombreCategoria = getString(R.string.GENERAL)
 
         //Codigo prueba SING OUT Google
         val btnLogOut = binding.btnLogOut
@@ -43,9 +47,9 @@ class MainActivity : AppCompatActivity() {
         val btmNavView = binding.btmNavView
 
         btmNavView.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
-        val navContoller = findNavController(R.id.contenedor_main)
+        navContoller = findNavController(R.id.contenedor_main)
 
-        val navOptions = NavOptions.Builder()
+        navOptions = NavOptions.Builder()
                 .setLaunchSingleTop(true)
                 .setEnterAnim(R.anim.enter_anim)
                 .setExitAnim(R.anim.exit_anim)
@@ -87,6 +91,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
     private fun signOut() {
 
         FirebaseAuth.getInstance().signOut()
@@ -104,4 +109,27 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
+
+    fun mostrarFragmentNoticiasByCategorias(nombreCategoria : String, keyCategoria : String){
+        this.nombreCategoria = nombreCategoria
+        this.keyCategoria = keyCategoria
+        navContoller.navigate(R.id.mostrarNoticiasByCategoriaFragment, null, navOptions)
+    }
+
+    fun mostrarFragmentCategorias(){
+        navContoller.navigate(R.id.categoriesFragment, null, navOptions)
+    }
+
+    fun getNombreCategoria() : String{
+        return this.nombreCategoria
+    }
+
+    fun getKeyCategoria() : String{
+        return this.keyCategoria
+    }
+
+
+
+
 }

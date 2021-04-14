@@ -3,16 +3,14 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
 
 }
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
-    androidExtensions {
-        experimental = true
-    }
+
 
     defaultConfig {
         applicationId "com.smartproductions.rawnews"
@@ -105,6 +103,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.firebaseui:firebase-ui-database:6.2.1'
 
     //BCrypt
     implementation("com.ToxicBakery.library.bcrypt:bcrypt:+")

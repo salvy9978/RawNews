@@ -38,6 +38,7 @@ class ListaNoticiasAdapter(
         val btnLikeNoticia : ImageView
         val tvFecha : TextView
         val cvNoticia : CardView
+        val tvLikes : TextView
 
 
         init {
@@ -49,7 +50,7 @@ class ListaNoticiasAdapter(
             ivElementoNoticia = view.findViewById(R.id.ivElementoNoticia)
             tvFecha = view.findViewById(R.id.tvFecha)
             cvNoticia = view.findViewById(R.id.cvNoticia)
-
+            tvLikes = view.findViewById(R.id.tvLikes)
         }
 
 
@@ -73,17 +74,29 @@ class ListaNoticiasAdapter(
         val imageLoadTask = ImageLoadTask(dataSet[position].imageUrl, holder.ivElementoNoticia)
         imageLoadTask.execute()
 
+        dataSet[position].uuid?.let { firebaseRepository.checkIfNoticiaIsLiked(holder.btnLikeNoticia, uidUsuario = userUID, uidNoticia = it, noticia = dataSet[position]) }
+
         holder.btnLikeNoticia.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                like(holder.btnLikeNoticia, holder.btnLikeNoticia.context, dataSet[position])
+                like(holder.btnLikeNoticia, holder.btnLikeNoticia.context, dataSet[position], holder.tvLikes)
+
             }
         })
 
-        ViewCompat.setTransitionName(holder.ivElementoNoticia, "noticiaImagen$position")
-        ViewCompat.setTransitionName(holder.tvTitulo, "noticiaTitulo$position")
+        //ViewCompat.setTransitionName(holder.ivElementoNoticia, "noticiaImagen$position")
+        //ViewCompat.setTransitionName(holder.tvTitulo, "noticiaTitulo$position")
 
+        
         holder.cvNoticia.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
+
+                /*
+                ------------------------------------------------------------------------------------
+                ------------------------------------------------------------------------------------
+                NOTA: este fragmento de código no se usa debido a que la API no envía una descripción
+                de la noticia completa y estéticamente y funcionalmente no queda bien
+                ------------------------------------------------------------------------------------
+                ------------------------------------------------------------------------------------
                 //Ir a detailed view
                 val bundleInfo = Bundle()
                 bundleInfo.putParcelable("noticia", dataSet[position])
@@ -109,7 +122,15 @@ class ListaNoticiasAdapter(
                     )
 
                 v?.context?.startActivity(intentDetailActivity, options?.toBundle())
+                */
 
+                //Ir a detailed view
+                val intentDetailActivity = Intent(v?.context, NoticiaDetailActivity::class.java)
+                //Ir a detailed view
+                val bundleInfo = Bundle()
+                bundleInfo.putParcelable("noticia", dataSet[position])
+                intentDetailActivity.putExtra("bundle", bundleInfo)
+                v?.context?.startActivity(intentDetailActivity)
 
             }
         })
@@ -120,106 +141,103 @@ class ListaNoticiasAdapter(
         return dataSet.size
     }
 
-    private fun like(btnLike: ImageView, context: Context, noticia: Noticia){
-        when (btnLike.tag.toString()) {
-            "ic_heart" -> {
-                btnLike.setImageResource(R.drawable.ic_heart_checked)
-                btnLike.setColorFilter(
-                    ContextCompat.getColor(context, R.color.secondary_Light),
-                    android.graphics.PorterDuff.Mode.SRC_IN
-                )
-                btnLike.tag = "ic_heart_checked"
-                val scaleAnimationAumento = ScaleAnimation(
-                    0f,
-                    1.2f,
-                    0f,
-                    1.2f,
-                    Animation.RELATIVE_TO_SELF,
-                    0.5f,
-                    Animation.RELATIVE_TO_SELF,
-                    0.5f
-                )
-                scaleAnimationAumento.interpolator = LinearInterpolator()
-                scaleAnimationAumento.duration = 100
-                scaleAnimationAumento.setAnimationListener(object : Animation.AnimationListener {
-                    override fun onAnimationStart(animation: Animation?) {
-                    }
+    private fun like(btnLike: ImageView, context: Context, noticia: Noticia, tvLikesContador : TextView){
 
-                    override fun onAnimationEnd(animation: Animation?) {
-                        val scaleAnimationDisminuir = ScaleAnimation(
-                            1.2f,
-                            1f,
-                            1.2f,
-                            1f,
-                            Animation.RELATIVE_TO_SELF,
-                            0.5f,
-                            Animation.RELATIVE_TO_SELF,
-                            0.5f
-                        )
-                        scaleAnimationDisminuir.interpolator = LinearInterpolator()
-                        scaleAnimationDisminuir.duration = 30
-                        btnLike.startAnimation(scaleAnimationDisminuir)
-                    }
+        if(!noticia.isLiked){
+            btnLike.setImageResource(R.drawable.ic_heart_checked)
+            btnLike.setColorFilter(
+                ContextCompat.getColor(context, R.color.secondary_Light),
+                android.graphics.PorterDuff.Mode.SRC_IN
+            )
+            val scaleAnimationAumento = ScaleAnimation(
+                0f,
+                1.2f,
+                0f,
+                1.2f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f
+            )
+            scaleAnimationAumento.interpolator = LinearInterpolator()
+            scaleAnimationAumento.duration = 100
+            scaleAnimationAumento.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                }
 
-                    override fun onAnimationRepeat(animation: Animation?) {
+                override fun onAnimationEnd(animation: Animation?) {
+                    val scaleAnimationDisminuir = ScaleAnimation(
+                        1.2f,
+                        1f,
+                        1.2f,
+                        1f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f
+                    )
+                    scaleAnimationDisminuir.interpolator = LinearInterpolator()
+                    scaleAnimationDisminuir.duration = 30
+                    btnLike.startAnimation(scaleAnimationDisminuir)
+                }
 
-                    }
-                })
-                btnLike.startAnimation(scaleAnimationAumento)
+                override fun onAnimationRepeat(animation: Animation?) {
 
-                noticia.uuid?.let { firebaseRepository.likeNoticia(userUID, it, noticia) }
+                }
+            })
+            btnLike.startAnimation(scaleAnimationAumento)
 
-            }
-            "ic_heart_checked" -> {
-                btnLike.setImageResource(R.drawable.ic_heart);
-                btnLike.setColorFilter(
-                    ContextCompat.getColor(context, R.color.white),
-                    android.graphics.PorterDuff.Mode.SRC_IN
-                )
-                btnLike.tag = "ic_heart"
-                noticia.uuid?.let { firebaseRepository.unLikeNoticia(userUID, it) }
-                val scaleAnimationDisminuir = ScaleAnimation(
-                    1f,
-                    1.2f,
-                    1f,
-                    1.2f,
-                    Animation.RELATIVE_TO_SELF,
-                    0.5f,
-                    Animation.RELATIVE_TO_SELF,
-                    0.5f
-                )
-                scaleAnimationDisminuir.interpolator = LinearInterpolator()
-                scaleAnimationDisminuir.duration = 30
-                scaleAnimationDisminuir.setAnimationListener(object : Animation.AnimationListener {
-                    override fun onAnimationStart(animation: Animation?) {
-                    }
+            noticia.uuid?.let { firebaseRepository.likeNoticia(userUID, it, noticia, tvLikesContador) }
 
-                    override fun onAnimationEnd(animation: Animation?) {
-                        val scaleAnimationAumento = ScaleAnimation(
-                            1.2f,
-                            1f,
-                            1.2f,
-                            1f,
-                            Animation.RELATIVE_TO_SELF,
-                            0.5f,
-                            Animation.RELATIVE_TO_SELF,
-                            0.5f
-                        )
-                        scaleAnimationAumento.interpolator = LinearInterpolator()
-                        scaleAnimationAumento.duration = 30
-                        btnLike.startAnimation(scaleAnimationAumento)
-                    }
+            noticia.isLiked = true
+        }else{
+            btnLike.setImageResource(R.drawable.ic_heart);
+            btnLike.setColorFilter(
+                ContextCompat.getColor(context, R.color.white),
+                android.graphics.PorterDuff.Mode.SRC_IN
+            )
+            val scaleAnimationDisminuir = ScaleAnimation(
+                1f,
+                1.2f,
+                1f,
+                1.2f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f
+            )
+            scaleAnimationDisminuir.interpolator = LinearInterpolator()
+            scaleAnimationDisminuir.duration = 30
+            scaleAnimationDisminuir.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                }
 
-                    override fun onAnimationRepeat(animation: Animation?) {
+                override fun onAnimationEnd(animation: Animation?) {
+                    val scaleAnimationAumento = ScaleAnimation(
+                        1.2f,
+                        1f,
+                        1.2f,
+                        1f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f
+                    )
+                    scaleAnimationAumento.interpolator = LinearInterpolator()
+                    scaleAnimationAumento.duration = 30
+                    btnLike.startAnimation(scaleAnimationAumento)
+                }
 
-                    }
-                })
-                btnLike.startAnimation(scaleAnimationDisminuir)
+                override fun onAnimationRepeat(animation: Animation?) {
 
-
-            }
-
+                }
+            })
+            btnLike.startAnimation(scaleAnimationDisminuir)
+            noticia.uuid?.let { firebaseRepository.unLikeNoticia(userUID, it, noticia) }
+            noticia.isLiked = false
         }
+
+
     }
 
 

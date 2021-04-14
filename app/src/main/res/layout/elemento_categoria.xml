@@ -10,6 +10,7 @@
     android:layout_marginBottom="6dp"
     app:cardCornerRadius="12dp"
     app:cardBackgroundColor="@color/primary_Light"
+    android:id="@+id/cvCategoria"
     >
     <ImageView
         android:layout_width="match_parent"
