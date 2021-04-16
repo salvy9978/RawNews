@@ -14,6 +14,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.Task
+import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -221,7 +227,42 @@ class FirebaseRepository (){
 
     }
 
+    fun deleteAccount(mAuth : FirebaseAuth, passwordDeleteAccount: String, textInputLayoutPassword : TextInputLayout){
+        val dbRef = database.child("users").child(mAuth.currentUser.uid).child("passwordForDeleteAccount")
+        dbRef?.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    if(Hash().sha256(passwordDeleteAccount).equals(snapshot.value.toString())){
+                        mAuth.currentUser.delete()
+                        database.child("users").child(mAuth.currentUser.uid).removeValue()
+                        Toast.makeText(textInputLayoutPassword.context,textInputLayoutPassword.context.getString(R.string.account_deleted), Toast.LENGTH_SHORT).show()
+
+                        mAuth.signOut()
+                        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                            .requestEmail()
+                            .build()
+                        val mGoogleSignInClient = GoogleSignIn.getClient(textInputLayoutPassword.context, gso)
+                        mGoogleSignInClient.signOut()
+
+                        val intentIrLoginActivity = Intent(textInputLayoutPassword.context, LoginActivity :: class.java)
+                        textInputLayoutPassword.context.startActivity(intentIrLoginActivity)
+                    }else{
+                        textInputLayoutPassword.error = textInputLayoutPassword.context.getString(R.string.incorrect_password)
+                    }
+
+                }else{
+                    Toast.makeText(textInputLayoutPassword.context,textInputLayoutPassword.context.getString(R.string.error_deleting_account), Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
 
 
 
 }
+
+

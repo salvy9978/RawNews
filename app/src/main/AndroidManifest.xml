@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RawNews">
-        <activity android:name=".views.NoticiaDetailActivity"></activity>
+        <activity android:name=".views.PerfilActivity"></activity>
+        <activity android:name=".views.NoticiaDetailActivity" />
         <activity
             android:name=".views.MainActivity"
             android:screenOrientation="portrait" />

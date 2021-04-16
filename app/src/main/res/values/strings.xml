@@ -7,6 +7,7 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="logout">Log Out</string>
     <string name="forgotten_password">Forgot password?</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login_here">Login here</string>
@@ -47,6 +48,16 @@
     <string name="one_like">Like</string>
 
 
-
-
+    <!-- PERFIL -->
+    <string name="profile">PROFILE</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="email">Email:</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="delete_account_info_text">Introduce the account deletion password:</string>
+    <string name="confirm_deletion">Confirm Deletion</string>
+    <string name="delete_account_hint">Account Delete Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_deleting_account">An error occurred while the account was being deleted</string>
+    <string name="account_deleted">Account deleted</string>
+    <string name="incorrect_password">Incorrect Password</string>
 </resources>

@@ -36,6 +36,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         nombreCategoria = getString(R.string.GENERAL)
 
+        //Seguridad por si no está logueado devolver a LoginActivity
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if(currentUser==null){
+            val intentIrLoginActivity = Intent(this, LoginActivity::class.java)
+            startActivity(intentIrLoginActivity)
+            finish()
+        }
+
         //Codigo prueba SING OUT Google
         val btnLogOut = binding.btnLogOut
         btnLogOut.setOnClickListener(object : View.OnClickListener {
@@ -43,6 +52,21 @@ class MainActivity : AppCompatActivity() {
                 signOut()
             }
         })
+
+        //Boton ir al perfil
+        binding.btnProfile.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intentIrPerfil = Intent(applicationContext, PerfilActivity::class.java)
+                startActivity(intentIrPerfil)
+            }
+
+        })
+
+
+
+
+
+
         //BOTTOM NAVIGATION VIEW--------------INICIO------------------
         val btmNavView = binding.btmNavView
 

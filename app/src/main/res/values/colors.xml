@@ -16,4 +16,7 @@
     <color name="secondary_Light">#ea4c36</color>
     <color name="secondary_Dark">#790000</color>
 
+
+    <color name="transparent">#80000000</color>
+
 </resources>

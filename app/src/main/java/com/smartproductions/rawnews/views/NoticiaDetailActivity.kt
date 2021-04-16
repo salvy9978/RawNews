@@ -42,7 +42,14 @@ class NoticiaDetailActivity : AppCompatActivity() {
         firebaseRepository = FirebaseRepository()
         mAuth = FirebaseAuth.getInstance()
 
+        //Seguridad por si no está logueado devolver a LoginActivity
+        val currentUser = mAuth.currentUser
 
+        if(currentUser==null){
+            val intentIrLoginActivity = Intent(this, LoginActivity::class.java)
+            startActivity(intentIrLoginActivity)
+            finish()
+        }
         /*
         --------------------------------------------------------------------------------------------
         --------------------------------------------------------------------------------------------
@@ -90,6 +97,15 @@ class NoticiaDetailActivity : AppCompatActivity() {
             override fun onClick(v: View?) {
                 signOut()
             }
+        })
+
+        //Boton ir al perfil
+        binding.btnProfile.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intentIrPerfil = Intent(applicationContext, PerfilActivity::class.java)
+                startActivity(intentIrPerfil)
+            }
+
         })
 
         //Boton ir hacia atras
