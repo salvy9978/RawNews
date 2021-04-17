@@ -106,5 +106,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:6.2.1'
 
     //BCrypt
-    implementation("com.ToxicBakery.library.bcrypt:bcrypt:+")
+    implementation "org.mindrot:jbcrypt:0.4"
+
+   
 }

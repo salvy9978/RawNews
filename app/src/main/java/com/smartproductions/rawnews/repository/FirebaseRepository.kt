@@ -46,7 +46,7 @@ class FirebaseRepository (){
 
 
     fun setPasswordForDeleteAccount(uid: String, password: String){
-        database.child("users").child(uid).child("passwordForDeleteAccount").setValue(Hash().sha256(password))
+        database.child("users").child(uid).child("passwordForDeleteAccount").setValue(Hash().hashFunction(password))
 
     }
 
@@ -232,7 +232,7 @@ class FirebaseRepository (){
         dbRef?.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    if(Hash().sha256(passwordDeleteAccount).equals(snapshot.value.toString())){
+                    if(Hash().hashFunctionCompare(passwordDeleteAccount, snapshot.value.toString())){
                         mAuth.currentUser.delete()
                         database.child("users").child(mAuth.currentUser.uid).removeValue()
                         Toast.makeText(textInputLayoutPassword.context,textInputLayoutPassword.context.getString(R.string.account_deleted), Toast.LENGTH_SHORT).show()
